@@ -1,0 +1,12 @@
+package com.example.gofdesignpattern.week02.woojin
+
+/**
+ * 마이데이터 콜렉터 팩토리 인터페이스
+ * 은행, 카드, 보헙 세 종류의 콜렉터 생성하는 팩토리 구현
+ */
+class InsuranceMyDataCollectorFactory: MyDataCollectorFactory {
+    override fun getMyDataCollectorInstance(): MyDataCollector {
+        return BankMyDataCollector("보험")
+    }
+
+}
