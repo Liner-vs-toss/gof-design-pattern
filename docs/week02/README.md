@@ -31,6 +31,13 @@
   - 추상클래스에서 하던 일을 인터페이스가 대신 할 수 있기 때문에 추상클래스를 많이 사용하지 않는다.
   - 자바 9부터는 인터페이스에 private 메소드를 정의할 수 있다.
 
+### 팩토리 메소드 패턴 실무 적용
+- 단순 팩토리 패턴
+  - 매개변수의 값에 따라 또는 메소드에 따라 각기 다른 인스턴스를 리턴하는 단순한 버전의 팩토리 패턴
+  - java.lang.Calendar 또는 java.lang.NumberFormat
+- Spring BeanFactory
+  - Object 타입의 Product를 만드는 BeanFactory라는 creator
+
 ---
 
 # 과제
