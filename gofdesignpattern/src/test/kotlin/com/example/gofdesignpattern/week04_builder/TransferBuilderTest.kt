@@ -44,7 +44,7 @@ class TransferBuilderTest {
     fun `name 10글자를 초과한 경우 RuntimeException이 발생한다`() {
         shouldThrowAny {
             DefaultTransferBuilder()
-                .newInstance("가나다라마바사아차카타파하", 22)
+                .name("가나다라마바사아차카타파하")
                 .createTransfer()
         }
     }

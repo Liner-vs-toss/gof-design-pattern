@@ -7,11 +7,11 @@ class DefaultTransferBuilder(
     var amount: Long = 0,
     var summary: String? = null,
 ) : TransferBuilder {
-    override fun newInstance(name: String, toBankCode: Int): TransferBuilder {
-        TODO("toBankCode가 92면 TossBankTransfer를 생성 하고 그 외인 경우 AnotherBankTransfer를 생성한다")
+    override fun name(name: String): TransferBuilder {
+        TODO("")
     }
 
-    override fun bankCode(fromBankCode: Int): TransferBuilder {
+    override fun bankCode(fromBankCode: Int, toBankCode: Int): TransferBuilder {
         TODO("bankCode는 항상 0보다 크고 500보다 작다")
     }
 
