@@ -6,13 +6,14 @@
 ![어댑터 패턴](./assets/adapter_pattern.png)
 
 - Targer : 클라이언트가 원하는 인터페이스
+- Adapter : 기존 코드(Adaptee)를 클라이언트가 원하는 인터페이스(Target)와 호환될 수 있도록 변환해주는 인터페이스
 - Adaptee : 기존 코드
 
 ## 코드 적용
 ![코드 적용](./assets/adapter_pattern_design.png)
 
 ```kotlin
-// LoginHandler
+// Client
 fun login(userName: String, password: String): String {
    val userDetails: UserDetails = userDetailsService.loadUser(userName)
    return if (userDetails.getPassword() == password) userDetails.getUserName()
@@ -21,7 +22,19 @@ fun login(userName: String, password: String): String {
 ```
 
 ```kotlin
-// AccountUserDetails
+// Target
+interface UserDetails {
+  fun getUserName(): String
+  fun getPassword(): String
+}
+
+interface UserDetailsService {
+  fun loadUser(userName: String): UserDetails
+}
+```
+
+```kotlin
+// Adapter
 class AccountUserDetails(
    private val account: Account
 ) : UserDetails {
@@ -29,7 +42,6 @@ class AccountUserDetails(
    override fun getPassword(): String = account.password
 }
 
-// AccountUserDetailsService
 class AccountUserDetailsService(
    private val accountService: AccountService
 ) : UserDetailsService {
@@ -37,6 +49,28 @@ class AccountUserDetailsService(
       val account: Account = accountService.findAccountByUserName(userName)
       return AccountUserDetails(account)
    }
+}
+```
+
+```kotlin
+// Adaptee
+class Account(
+  val userName: String,
+  val password: String,
+  val email: String
+)
+
+class AccountService {
+  fun findAccountByUserName(userName: String): Account =
+    Account(userName)
+
+  fun createNewAccount(account: Account) {
+    // TODO("Not implemented")
+  }
+
+  fun updateAccount(account: Account) {
+    // TODO("Not implemented")
+  }
 }
 ```
 
@@ -50,7 +84,7 @@ class AccountUserDetailsService(
 - 경우에 따라서 기존 코드가 해당 인터페이스를 구현하도록 수정하는 것이 좋은 선택이 될 수 있다.
 - 대안으로 Adaptee에 해당하는 코드를 직접 수정할 수 있다면, 클래스를 늘리지 않고도 실용적으로 어댑터 패턴 적용 가능하다.
 
-## 자바와 스프렝에서 찾아보는 패턴
+## 자바와 스프링에서 찾아보는 패턴
 ### 자바
 - java.util.Arrays#asList(T...)
 - java.util.Collections#list(Enumeration), java.util.Collections#enumeration()
@@ -91,3 +125,8 @@ public interface HandlerAdapter {
 ```
 
 ## 과제
+- 결제 단말기 간의 호환을 위한 어댑터를 만들어야 한다.
+  - 단말 A : 토스 단말
+  - 단말 B : 카카오 단말
+- 토스 가맹점은 토스 단말밖에 없는데, 강성 유저가 카카오 단말로 결제를 요구함. 토스 단말과 카카오 단말 호환을 위한 어댑터를 만들어보자!
+- 참고로 결제는 토스뱅크 카드만 받는다.

@@ -3,6 +3,9 @@ package com.example.gofdesignpattern.week06_adapter.`02_패턴_적용_후`.secur
 import com.example.gofdesignpattern.week06_adapter.`02_패턴_적용_후`.UserDetails
 import com.example.gofdesignpattern.week06_adapter.`02_패턴_적용_후`.UserDetailsService
 
+/**
+ * Client
+ */
 class LoginHandler(
     private val userDetailsService: UserDetailsService
 ) {
