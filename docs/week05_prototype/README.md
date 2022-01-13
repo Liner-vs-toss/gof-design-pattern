@@ -129,3 +129,7 @@ assert(copiedAnimal.hospital == animal.hospital)
 
 #### ModelMapper
 ![img_1.png](img_1.png)
+
+
+## 과제 
+- prototype을 이용하여 성능 개선해보기 
