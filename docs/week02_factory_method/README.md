@@ -1,4 +1,4 @@
-# 02. 팩토리 메소드 패턴 (Factory method) 패턴
+# 02. 팩토리 메소드 (Factory method) 패턴
 
 ![팩토리 메소드 패턴](./assets/factory-method-pattern.png)
 
