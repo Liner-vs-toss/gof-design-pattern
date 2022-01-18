@@ -8,22 +8,51 @@ class DefaultTransferBuilder(
     var summary: String? = null,
 ) : TransferBuilder {
     override fun name(name: String): TransferBuilder {
-        TODO("")
+        if (name.length > 10) {
+            throw RuntimeException("이름은 10글자를 초과할 수 없습니다.")
+        }
+        this.name = name
+        return this
     }
 
     override fun bankCode(fromBankCode: Int, toBankCode: Int): TransferBuilder {
-        TODO("bankCode는 항상 0보다 크고 500보다 작다")
+        this.fromBankCode = fromBankCode
+        this.toBankCode = toBankCode
+        return this
     }
 
     override fun amount(amount: Long): TransferBuilder {
-        TODO("amount는 0보다 커야 한다")
+        if (amount <0) {
+            throw RuntimeException("금액은 0보다 커야 합니다.")
+        }
+        this.amount = amount
+        return this
     }
 
     override fun summary(summary: String): TransferBuilder {
-        TODO("적요는 10글자를 초과할 수 없다")
+        if (summary.length > 10) {
+            throw RuntimeException("적요는 10글자를 초과할 수 없습니다.")
+        }
+        this.summary = summary
+        return this
     }
 
-    override fun createTransfer(): Transfer {
-        TODO("summary의 값이 없는 경우 name을 summary에 셋팅 해준다")
-    }
+    override fun createTransfer(): Transfer =
+        if (toBankCode == 92) {
+            TossBankTransfer(
+                name = name,
+                fromBankCode = fromBankCode,
+                toBankCode = toBankCode,
+                amount = amount,
+                summary = summary ?: name
+            )
+        } else {
+            AnotherBankTransfer(
+                name = name,
+                fromBankCode = fromBankCode,
+                toBankCode = toBankCode,
+                amount = amount,
+                summary = summary ?: name
+            )
+        }
 }
