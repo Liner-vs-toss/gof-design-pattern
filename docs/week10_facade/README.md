@@ -140,5 +140,10 @@ class FacadeInSpring {
 ```
 
 ## 과제
-- 
+- 간편 보험 가입을 위한 퍼사드를 구현한다.
+  - 서브 시스템 : 현대해상, 메리츠화재
+  - 퍼사드 인터페이스와 서브 시스템을 감싼 구현체  
 
+<div align="center">
+  <img width="600" src="./assets/homework.png" />
+</div>
