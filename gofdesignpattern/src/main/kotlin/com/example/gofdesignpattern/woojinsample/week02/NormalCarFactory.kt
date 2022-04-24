@@ -8,6 +8,4 @@ class NormalCarFactory : CarFactory {
     override fun prepareCar(car: Car) = car.run {
         super.prepareCar(car)
     }
-
-
 }
